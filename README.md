@@ -14,3 +14,17 @@ What's implemented:
 - (not yet)voltage conversion time
 - current calculation
 - chip ID reading
+
+## Usage
+
+```rust,ignore
+let mut voltmon = Ina3221::new(SharedI2cBus::new(mutex_i2c_bus))
+    // optionally set the shunt resistor values
+    // all defaults to 10 milli-ohms
+    .shunt_r1(100)
+    .shunt_r2(10)
+    .shunt_r3(100);
+
+println!("Channel1 voltage: {}mV", voltmon.bus_channel1().unwrap())
+println!("Channel2 current: {}mA", voltmon.current_channel2().unwrap())
+```
